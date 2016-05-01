@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Mix:</strong>
+  <%= @track.mix %>
+</p>
+
+<p>
+  <strong>Song:</strong>
+  <%= @track.song %>
+</p>
+
+<p>
+  <strong>Ord:</strong>
+  <%= @track.ord %>
+</p>
+
+<%= link_to 'Edit', edit_track_path(@track) %> |
+<%= link_to 'Back', tracks_path %>
