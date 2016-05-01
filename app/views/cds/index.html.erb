@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Cds</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Code</th>
+      <th>Time in sec</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cds.each do |cd| %>
+      <tr>
+        <td><%= cd.name %></td>
+        <td><%= cd.code %></td>
+        <td><%= cd.time_in_sec %></td>
+        <td><%= link_to 'Show', cd %></td>
+        <td><%= link_to 'Edit', edit_cd_path(cd) %></td>
+        <td><%= link_to 'Destroy', cd, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cd', new_cd_path %>

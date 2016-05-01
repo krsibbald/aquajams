@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @cd.name %>
+</p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @cd.code %>
+</p>
+
+<p>
+  <strong>Time in sec:</strong>
+  <%= @cd.time_in_sec %>
+</p>
+
+<%= link_to 'Edit', edit_cd_path(@cd) %> |
+<%= link_to 'Back', cds_path %>
