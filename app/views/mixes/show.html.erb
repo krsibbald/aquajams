@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @mix.name %>
+</p>
+
+<p>
+  <strong>Length in sec:</strong>
+  <%= @mix.length_in_sec %>
+</p>
+
+<p>
+  <strong>Recorded at:</strong>
+  <%= @mix.recorded_at %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @mix.description %>
+</p>
+
+<p>
+  <strong>Source:</strong>
+  <%= @mix.source %>
+</p>
+
+<p>
+  <strong>Music type:</strong>
+  <%= @mix.music_type %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @mix.notes %>
+</p>
+
+<%= link_to 'Edit', edit_mix_path(@mix) %> |
+<%= link_to 'Back', mixes_path %>
