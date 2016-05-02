@@ -1,0 +1,25 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @mix.name
+%p
+  %strong Length in sec:
+  = @mix.length_in_sec
+%p
+  %strong Recorded at:
+  = @mix.recorded_at
+%p
+  %strong Description:
+  = @mix.description
+%p
+  %strong Source:
+  = @mix.source
+%p
+  %strong Music type:
+  = @mix.music_type
+%p
+  %strong Notes:
+  = @mix.notes
+= link_to 'Edit', edit_mix_path(@mix)
+|
+= link_to 'Back', mixes_path

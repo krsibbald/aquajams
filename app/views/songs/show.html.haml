@@ -1,0 +1,22 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @song.name
+%p
+  %strong Artist:
+  = @song.artist
+%p
+  %strong Length in sec:
+  = @song.length_in_sec
+%p
+  %strong Year:
+  = @song.year
+%p
+  %strong Top billboard spot:
+  = @song.top_billboard_spot
+%p
+  %strong Billboard weeks:
+  = @song.billboard_weeks
+= link_to 'Edit', edit_song_path(@song)
+|
+= link_to 'Back', songs_path

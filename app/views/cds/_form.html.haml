@@ -1,0 +1,23 @@
+= form_for(@cd) do |f|
+  - if @cd.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@cd.errors.count, "error")
+        prohibited this cd from being saved:
+      %ul
+        - @cd.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.label :name
+    %br/
+    = f.text_field :name
+  .field
+    = f.label :code
+    %br/
+    = f.number_field :code
+  .field
+    = f.label :time_in_sec
+    %br/
+    = f.number_field :time_in_sec
+  .actions
+    = f.submit

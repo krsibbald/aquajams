@@ -1,0 +1,28 @@
+%p#notice= notice
+%h1 Listing Mixes
+%table
+  %thead
+    %tr
+      %th Name
+      %th Length in sec
+      %th Recorded at
+      %th Description
+      %th Source
+      %th Music type
+      %th Notes
+      %th{:colspan => "3"}
+  %tbody
+    - @mixes.each do |mix|
+      %tr
+        %td= mix.name
+        %td= mix.length_in_sec
+        %td= mix.recorded_at
+        %td= mix.description
+        %td= mix.source
+        %td= mix.music_type
+        %td= mix.notes
+        %td= link_to 'Show', mix
+        %td= link_to 'Edit', edit_mix_path(mix)
+        %td= link_to 'Destroy', mix, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Mix', new_mix_path

@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @cd.name
+%p
+  %strong Code:
+  = @cd.code
+%p
+  %strong Time in sec:
+  = @cd.time_in_sec
+= link_to 'Edit', edit_cd_path(@cd)
+|
+= link_to 'Back', cds_path

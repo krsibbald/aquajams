@@ -1,0 +1,23 @@
+= form_for(@track) do |f|
+  - if @track.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@track.errors.count, "error")
+        prohibited this track from being saved:
+      %ul
+        - @track.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.label :mix_id
+    %br/
+    = f.text_field :mix_id
+  .field
+    = f.label :song_id
+    %br/
+    = f.text_field :song_id
+  .field
+    = f.label :ord
+    %br/
+    = f.number_field :ord
+  .actions
+    = f.submit

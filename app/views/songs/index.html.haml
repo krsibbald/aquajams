@@ -1,0 +1,26 @@
+%p#notice= notice
+%h1 Listing Songs
+%table
+  %thead
+    %tr
+      %th Name
+      %th Artist
+      %th Length in sec
+      %th Year
+      %th Top billboard spot
+      %th Billboard weeks
+      %th{:colspan => "3"}
+  %tbody
+    - @songs.each do |song|
+      %tr
+        %td= song.name
+        %td= song.artist
+        %td= song.length_in_sec
+        %td= song.year
+        %td= song.top_billboard_spot
+        %td= song.billboard_weeks
+        %td= link_to 'Show', song
+        %td= link_to 'Edit', edit_song_path(song)
+        %td= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Song', new_song_path
