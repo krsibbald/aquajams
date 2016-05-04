@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: 'songs#index'
   resources :tracks
   resources :mixes
   resources :songs
