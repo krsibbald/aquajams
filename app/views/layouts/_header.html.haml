@@ -1,0 +1,16 @@
+%nav.navbar.navbar-default
+  .container-fluid
+    .navbar-header
+      .navbar-brand
+        AquaJams
+    %ul.nav.navbar-nav
+      %li{:class => (@tab=='song' ? 'active' : '')}
+        =link_to 'Songs', songs_path
+      %li{:class => (@tab=='artist' ? 'active' : '')}
+        =link_to 'Artists', artists_path
+      %li{:class => (@tab=='cd' ? 'active' : '')}
+        =link_to 'CDs', cds_path, :class => (@tab=='cd' ? 'active' : '')
+      %li{:class => (@tab=='mix' ? 'active' : '')}
+        =link_to 'Mixes', mixes_path
+      %li{:class => (@tab=='track' ? 'active' : '')}
+        =link_to 'Tracks', tracks_path

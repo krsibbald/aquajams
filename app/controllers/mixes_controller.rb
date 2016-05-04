@@ -71,4 +71,8 @@ class MixesController < ApplicationController
     def mix_params
       params.require(:mix).permit(:name, :length_in_sec, :recorded_at, :description, :source, :music_type, :notes)
     end
+
+    def set_tab
+      @tab = 'mix'
+    end
 end

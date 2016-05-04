@@ -71,4 +71,8 @@ class CdsController < ApplicationController
     def cd_params
       params.require(:cd).permit(:name, :code, :time_in_sec)
     end
+
+    def set_tab
+      @tab = 'cd'
+    end
 end

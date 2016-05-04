@@ -71,4 +71,8 @@ class SongsController < ApplicationController
     def song_params
       params.require(:song).permit(:name, :artist_id, :length_in_sec, :year, :top_billboard_spot, :billboard_weeks)
     end
+
+    def set_tab
+      @tab = 'song'
+    end
 end

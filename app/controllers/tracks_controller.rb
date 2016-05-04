@@ -71,4 +71,8 @@ class TracksController < ApplicationController
     def track_params
       params.require(:track).permit(:mix_id, :song_id, :ord)
     end
+
+    def set_tab
+      @tab = 'track'
+    end
 end
