@@ -1,0 +1,15 @@
+#songs-upload.row
+  .col-md-12
+    %h2 Upload Songs
+    .right-actions
+      = link_to 'View All Schools', songs_path
+    .row
+      .col-md-4
+        = form_for upload_songs_path, :html => {:multipart => true}, :method => :post do |f|
+          .form-group
+            = file_field(:import, :file, :size => 65)
+          .form-group
+            = link_to 'cancel', upload_songs_path, class: "btn btn-default"
+            %button.btn.btn-primary Upload
+  .col-md-12
+    .well.upload-notes

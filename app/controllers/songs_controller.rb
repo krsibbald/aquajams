@@ -61,6 +61,18 @@ class SongsController < ApplicationController
     end
   end
 
+  def upload
+    if request.post?
+      if !(params && params[:import] && params[:import][:file])
+        flash[:error] = 'No file selected'
+      else
+        #import
+        flash[:notice] = 'Queued for processing'
+      end
+      redirect_to upload_songs_path
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_song
