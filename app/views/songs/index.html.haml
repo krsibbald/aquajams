@@ -8,8 +8,8 @@
       %th=sort_link @search, :artist_name, 'Artist'
       %th=sort_link @search, :length_in_sec, "Length in sec"
       %th=sort_link @search, :year
-      %th Top billboard spot
-      %th Billboard weeks
+      %th=sort_link @search, :top_billboard_spot, 'Top billboard spot'
+      %th=sort_link @search, :billboard_weeks, 'Billboard weeks'
       %th{:colspan => "3"}
   %tbody
     - @songs.each do |song|
