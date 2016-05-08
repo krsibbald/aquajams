@@ -43,7 +43,8 @@ class Song < ActiveRecord::Base
 
           s.top_billboard_spot = info['___Billboard Position']
           s.billboard_weeks = info['__+ Weeks at']
-          s.cd_id = cd.try(:id)
+          s.cd_id = cd.try(:id) #cd is set during cd row processing
+          s.bpm = info['BPM 1']
           s.save!
         end
       end
