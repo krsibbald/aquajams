@@ -4,10 +4,11 @@ class Song < ActiveRecord::Base
   belongs_to :artist
   belongs_to :cd
 
-  def self.import(file_name)
+  def self.import(file)
     row_num = 0
     cd = nil
     headers = []
+    file_name = file.respond_to?(:path) ? file.path : file
     CSV.foreach(file_name) do |row|
       row_num += 1
       if row_num == 1

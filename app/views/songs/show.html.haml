@@ -4,7 +4,8 @@
   = @song.name
 %p
   %strong Artist:
-  = @song.artist
+  -if @song.artist
+    = link_to @song.artist.name, artist_path(@song.artist)
 %p
   %strong Length in sec:
   = @song.length_in_sec

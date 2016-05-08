@@ -14,7 +14,9 @@
     - @songs.each do |song|
       %tr
         %td= song.name
-        %td= song.artist
+        %td
+          -if song.artist
+            = link_to song.artist.name, artist_path(song.artist)
         %td= song.length_in_sec
         %td= song.year
         %td= song.top_billboard_spot

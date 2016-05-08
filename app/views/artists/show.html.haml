@@ -2,6 +2,11 @@
 %p
   %strong Name:
   = @artist.name
+%p
+  %strong Songs:
+  -@artist.songs.each do |song|
+    %li 
+      = link_to song.name, song_path(song)
 = link_to 'Edit', edit_artist_path(@artist)
 |
 = link_to 'Back', artists_path

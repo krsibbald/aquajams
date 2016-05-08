@@ -6,8 +6,10 @@
   %strong Code:
   = @cd.code
 %p
-  %strong Time in sec:
-  = @cd.time_in_sec
+  %strong Songs:
+  -@cd.songs.each do |song|
+    %li 
+      = link_to song.name, song_path(song)
 = link_to 'Edit', edit_cd_path(@cd)
 |
 = link_to 'Back', cds_path
