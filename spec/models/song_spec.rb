@@ -36,7 +36,7 @@ RSpec.describe Song, type: :model do
       Song.import(csv)
       bad_song = Song.where(name: '1986, Billboard Top Hits').first
       expect(bad_song).to be_nil
-      good_cd = Cd.where.where(name: '1986, Billboard Top Hits').first
+      good_cd = Cd.where(name: '1986, Billboard Top Hits').first
       expect(good_cd).to_not be_nil
     end
   end
