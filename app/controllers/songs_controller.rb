@@ -67,7 +67,8 @@ class SongsController < ApplicationController
         flash[:error] = 'No file selected'
       else
         #import
-        flash[:notice] = 'Queued for processing'
+        Song.import(params[:import][:file])
+        flash[:notice] = 'Songs imported'
       end
       redirect_to upload_songs_path
     end
