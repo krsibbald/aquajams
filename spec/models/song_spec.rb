@@ -19,6 +19,7 @@ RSpec.describe Song, type: :model do
       expect(blues_song.length_in_sec).to eq 118
       expect(blues_song.artist.try(:name)).to eq "Eddie Cochran"
       expect(blues_song.year).to eq 1958
+      expect(blues_song.bpm).to eq 157
       expect(blues_song.cd.try(:name)).to eq "1958, The Rock 'n' Roll Era"
     end
     it "artist already exists, new cd" do
@@ -30,6 +31,7 @@ RSpec.describe Song, type: :model do
       expect(stuck_song.year).to eq 1986
       expect(stuck_song.top_billboard_spot).to eq 1
       expect(stuck_song.billboard_weeks).to eq 1.03
+      expect(stuck_song.bpm).to eq 120
       expect(stuck_song.cd.try(:name)).to eq "1986, Billboard Top Hits"
     end
     it "creates cds" do
