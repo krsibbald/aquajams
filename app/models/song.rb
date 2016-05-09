@@ -3,6 +3,8 @@ require 'csv'
 class Song < ActiveRecord::Base
   belongs_to :artist
   belongs_to :cd
+  #songs are unique to name, cd & artist
+  validates_uniqueness_of :name, :scope => [:cd_id, :artist_id]
 
   def self.import(file)
     row_num = 0
@@ -33,7 +35,7 @@ class Song < ActiveRecord::Base
           end
         else #this row has song information
           song_name = info["___Song's Name"]
-          if cd && cd.songs.where(name: song_name).none?
+          if cd #&& cd.songs.where(name: song_name).none?
             s = Song.new
             s.name = song_name
             t = info["Time, as hh:mm:ss"]
