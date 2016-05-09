@@ -21,9 +21,20 @@ class Mix < ActiveRecord::Base
           m = Mix.new(code: mix_code)
           m.multiple = (info['One or Multiple?'] == 'm')
           ttime = info['__Total Time']
-          # m.length_in_sec = (ttime * 60) unless ttime.blank?
-          m.date_for_mix_list = info['___"Mix List" ID:  CD_mm-dd-yy.xls.']
-          m.recorded_at = info['Date Recorded']
+          m.length_in_sec = (ttime.to_i * 60) unless ttime.blank?
+          mix_list_date_str = info['___"Mix List" ID:  CD_mm-dd-yy.xls.']
+          unless mix_list_date_str.blank?
+            date_arr = mix_list_date_str.split('/').map(&:to_i)
+            d = Date.new((2000 + date_arr[2]), date_arr[0], date_arr[1])
+            m.date_for_mix_list = d
+          end
+
+          recorded_date_string = info['Date Recorded']
+          unless recorded_date_string.blank?
+            date_arr = recorded_date_string.split('/').map(&:to_i)
+            d = Date.new((2000 + date_arr[2]), date_arr[0], date_arr[1])
+            m.recorded_at = d
+          end
           m.description = info['___Songs']
           m.source = info['Source']
           m.music_type = info['___Music Type']
