@@ -9,6 +9,9 @@ class Song < ActiveRecord::Base
     cd = nil
     headers = []
     file_name = file.respond_to?(:path) ? file.path : file
+    song_count = 0
+    cd_count = 0
+    artist_count = 0
     CSV.foreach(file_name) do |row|
       row_num += 1
       if row_num == 1
@@ -22,7 +25,10 @@ class Song < ActiveRecord::Base
             cd_name = info["___Song's Name"]
             cd = Cd.where(name: cd_name).first
             unless cd
-              cd = Cd.create(name: cd_name, code: cd_code)
+              cd = Cd.new(name: cd_name, code: cd_code)
+              if cd.save
+                cd_count += 1
+              end
             end
           end
         else #this row has song information
@@ -40,7 +46,12 @@ class Song < ActiveRecord::Base
             artist_name = info['___Artist'].try(:strip)
             unless artist_name.blank?
               artist = Artist.find_by_name artist_name
-              artist = Artist.create(name: artist_name) unless artist
+              unless artist
+                artist = Artist.new(name: artist_name)
+                if artist.save
+                  artist_count += 1
+                end
+              end
               s.artist = artist
             end
 
@@ -48,10 +59,14 @@ class Song < ActiveRecord::Base
             s.billboard_weeks = info['__+ Weeks at']
             s.cd_id = cd.try(:id) #cd is set during cd row processing
             s.bpm = info['BPM 1']
-            s.save!
+            if s.save!
+              song_count += 1
+            end
           end
         end
       end
     end
+    "#{song_count} Songs, #{cd_count} CDs, and #{artist_count} Artists added"
   end
+
 end
