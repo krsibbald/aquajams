@@ -34,6 +34,16 @@ RSpec.describe Song, type: :model do
       expect(stuck_song.bpm).to eq 120
       expect(stuck_song.cd.try(:name)).to eq "1986, Billboard Top Hits"
     end
+    it "artist, cd, song already exists" do
+      sil = FactoryGirl.create :artist, name: 'Silhouettes'
+      FactoryGirl.create :song, name: 'Get a Job', artist: sil, cd: cd1958
+      Song.import(csv)
+      expect(Song.where(name: 'Get a Job').count).to eq 1
+      job_song = Song.where(name: 'Get a Job').first
+      expect(job_song).to_not be_nil
+      expect(job_song.artist.try(:name)).to eq "Silhouettes"
+      expect(job_song.cd.try(:name)).to eq "1958, The Rock 'n' Roll Era"
+    end
     it "creates cds" do
       Song.import(csv)
       bad_song = Song.where(name: '1986, Billboard Top Hits').first
