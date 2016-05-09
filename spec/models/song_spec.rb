@@ -39,6 +39,8 @@ RSpec.describe Song, type: :model do
       FactoryGirl.create :song, name: 'Get a Job', artist: sil, cd: cd1958
       Song.import(csv)
       expect(Song.where(name: 'Get a Job').count).to eq 1
+      expect(Cd.where(name: "1958, The Rock 'n' Roll Era").count).to eq 1
+      expect(Artist.where(name: 'Silhouettes').count).to eq 1
       job_song = Song.where(name: 'Get a Job').first
       expect(job_song).to_not be_nil
       expect(job_song.artist.try(:name)).to eq "Silhouettes"
