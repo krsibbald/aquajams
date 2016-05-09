@@ -14,7 +14,7 @@ class Song < ActiveRecord::Base
     song_count = 0
     cd_count = 0
     artist_count = 0
-    CSV.foreach(file_name) do |row|
+    CSV.foreach(file_name, 'r:ISO-8859-15:UTF-8') do |row|
       row_num += 1
       if row_num == 1
         headers = row

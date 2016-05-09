@@ -61,6 +61,19 @@ class MixesController < ApplicationController
     end
   end
 
+  def upload
+    if request.post?
+      if !(params && params[:import] && params[:import][:file])
+        flash[:error] = 'No file selected'
+      else
+        #import
+        message = Mix.import(params[:import][:file])
+        flash[:notice] = message
+      end
+      redirect_to upload_mixes_path
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_mix
