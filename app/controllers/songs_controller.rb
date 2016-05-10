@@ -6,7 +6,7 @@ class SongsController < ApplicationController
   def index
     @search = Song.search(params[:q]) #Using the Ransack Gem
     @page = params[:page] || 1
-    @songs = @search.result.includes(:artist)#.paginate(:page => @page, :per_page => 20)     
+    @songs = @search.result.includes(:artist).paginate(:page => @page, :per_page => 50)
   end
 
   # GET /songs/1

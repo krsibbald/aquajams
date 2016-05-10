@@ -1,6 +1,7 @@
 %p#notice= notice
 %h1 Listing Songs
 
+= will_paginate @songs
 %table.table.table-bordered
   %thead
     %tr
@@ -25,6 +26,7 @@
         %td= link_to 'Show', song
         %td= link_to 'Edit', edit_song_path(song)
         %td= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' }
+= will_paginate @songs
 %br/
 = link_to 'New Song', new_song_path
 \|
