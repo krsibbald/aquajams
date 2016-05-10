@@ -4,7 +4,7 @@
 %table.table.table-bordered
   %thead
     %tr
-      %th Name
+      %th=sort_link @search, :name
       %th{:colspan => "3"}
   %tbody
     - @artists.each do |artist|

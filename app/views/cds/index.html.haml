@@ -4,9 +4,9 @@
 %table.table.table-bordered
   %thead
     %tr
-      %th Name
-      %th Code
-      %th Time in sec
+      %th=sort_link @search, :name
+      %th=sort_link @search, :code
+      %th=sort_link @search, :time_in_sec
       %th{:colspan => "3"}
   %tbody
     - @cds.each do |cd|
