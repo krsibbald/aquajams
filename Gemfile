@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 
-ruby '2.1.5'
+ruby '2.2.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 
@@ -39,6 +39,7 @@ gem 'ransack'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'puma'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
