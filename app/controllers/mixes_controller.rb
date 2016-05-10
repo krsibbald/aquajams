@@ -4,7 +4,9 @@ class MixesController < ApplicationController
   # GET /mixes
   # GET /mixes.json
   def index
-    @mixes = Mix.all
+    @search = Mix.search(params[:q]) #Using the Ransack Gem
+    @page = params[:page] || 1
+    @mixes = @search.result.paginate(:page => @page, :per_page => 50)
   end
 
   # GET /mixes/1
