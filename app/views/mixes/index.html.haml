@@ -1,4 +1,3 @@
-%p#notice= notice
 %h1 Listing Mixes
 %table.table.table-bordered
   %thead
@@ -24,5 +23,9 @@
         %td= link_to 'Show', mix
         %td= link_to 'Edit', edit_mix_path(mix)
         %td= link_to 'Destroy', mix, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
+
+%br
+
 = link_to 'New Mix', new_mix_path
+\|
+=link_to 'Upload Mixes', upload_mixes_path

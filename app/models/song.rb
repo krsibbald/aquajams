@@ -1,6 +1,7 @@
 require 'csv'
 
 class Song < ActiveRecord::Base
+  HEADERS = ["CD's ID", "___Song's Name", "Time, as hh:mm:ss", '___Year', '___Artist', '___Billboard Position', '__+ Weeks at', 'BPM 1']
   belongs_to :artist
   belongs_to :cd
   #songs are unique to name, cd & artist

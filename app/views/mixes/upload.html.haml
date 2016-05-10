@@ -1,15 +1,15 @@
-#songs-upload.row
+#mixes-upload.row
   .col-md-12
-    %h2 Upload Songs
+    %h2 Upload Mixes
     .right-actions
-      = link_to 'View All Songs', songs_path
+      = link_to 'View All Mixes', songs_path
     .row
       .col-md-4
-        = form_for upload_songs_path, :html => {:multipart => true}, :method => :post do |f|
+        = form_for upload_mixes_path, :html => {:multipart => true}, :method => :post do |f|
           .form-group
             = file_field(:import, :file, :size => 65)
           .form-group
-            = link_to 'cancel', upload_songs_path, class: "btn btn-default"
+            = link_to 'cancel', upload_mixes_path, class: "btn btn-default"
             %button.btn.btn-primary Upload
   .col-md-12
     .well.upload-notes

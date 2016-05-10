@@ -1,6 +1,7 @@
 require 'csv'
 
 class Mix < ActiveRecord::Base
+  HEADERS = ["___Prime, RoundDown (2)", 'One or Multiple?', '__Total Time', '___"Mix List" ID:  CD_mm-dd-yy.xls.', 'Date Recorded', '___Songs', 'Source', '___Music Type', '___Remarks']
   has_many :tracks
   has_many :songs, through: :tracks
 

@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   
   resources :artists
   resources :cds
-  resources :mixes
+  resources :mixes do
+    collection do
+      get :upload
+      post :upload
+    end
+  end
   resources :songs do
     collection do
       get :upload
