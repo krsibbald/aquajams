@@ -4,7 +4,9 @@ class ArtistsController < ApplicationController
   # GET /artists
   # GET /artists.json
   def index
-    @artists = Artist.all
+    @search = Artist.search(params[:q]) #Using the Ransack Gem
+    @page = params[:page] || 1
+    @artists = @search.result.paginate(:page => @page, :per_page => 50)
   end
 
   # GET /artists/1

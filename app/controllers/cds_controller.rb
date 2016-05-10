@@ -4,7 +4,9 @@ class CdsController < ApplicationController
   # GET /cds
   # GET /cds.json
   def index
-    @cds = Cd.all
+    @search = Cd.search(params[:q]) #Using the Ransack Gem
+    @page = params[:page] || 1
+    @cds = @search.result.paginate(:page => @page, :per_page => 50)
   end
 
   # GET /cds/1

@@ -1,5 +1,6 @@
 %p#notice= notice
 %h1 Listing Artists
+= will_paginate @artists
 %table.table.table-bordered
   %thead
     %tr
@@ -12,5 +13,6 @@
         %td= link_to 'Show', artist
         %td= link_to 'Edit', edit_artist_path(artist)
         %td= link_to 'Destroy', artist, method: :delete, data: { confirm: 'Are you sure?' }
+= will_paginate @artists
 %br/
 = link_to 'New Artist', new_artist_path

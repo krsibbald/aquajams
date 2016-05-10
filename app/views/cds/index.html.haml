@@ -1,5 +1,6 @@
 %p#notice= notice
 %h1 Listing Cds
+= will_paginate @cds
 %table.table.table-bordered
   %thead
     %tr
@@ -16,5 +17,6 @@
         %td= link_to 'Show', cd
         %td= link_to 'Edit', edit_cd_path(cd)
         %td= link_to 'Destroy', cd, method: :delete, data: { confirm: 'Are you sure?' }
+= will_paginate @cds
 %br/
 = link_to 'New Cd', new_cd_path
