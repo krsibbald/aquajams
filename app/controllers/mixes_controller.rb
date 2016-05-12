@@ -69,7 +69,13 @@ class MixesController < ApplicationController
         flash[:error] = 'No file selected'
       else
         #import
-        SongImportWorker.perform_async(params[:import][:file])
+        name = params[:import][:file].original_filename
+
+        temp_filename =  'MIX' + SecureRandom.hex + '.csv'
+        path = File.join('tmp', temp_filename)
+        File.open(path, "wb") { |f| f.write(params[:import][:file].read) }
+
+        MixImportWorker.perform_async(path)
         flash[:notice] = 'Queued for processing'
       end
       redirect_to upload_mixes_path
