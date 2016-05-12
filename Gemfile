@@ -39,6 +39,9 @@ gem 'ransack'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem "sidekiq"
+gem 'sidekiq-unique-jobs'
+gem 'redis'
 gem 'puma'
 
 group :development, :test do
