@@ -40,8 +40,10 @@ gem 'ransack'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem "sidekiq"
-gem 'sidekiq-unique-jobs'
+# gem 'sidekiq-unique-jobs'
 gem 'redis'
+gem 'sinatra', require: false
+gem 'slim'
 gem 'puma'
 
 group :development, :test do
@@ -55,7 +57,7 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-
+  gem "better_errors"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end

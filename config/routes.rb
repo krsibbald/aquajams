@@ -1,5 +1,8 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   root to: 'songs#index'
+  mount Sidekiq::Web, at: "/sidekiq"
   
   resources :artists
   resources :cds

@@ -69,8 +69,8 @@ class MixesController < ApplicationController
         flash[:error] = 'No file selected'
       else
         #import
-        message = Mix.import(params[:import][:file])
-        flash[:notice] = message
+        SongImportWorker.perform_async(params[:import][:file])
+        flash[:notice] = 'Queued for processing'
       end
       redirect_to upload_mixes_path
     end

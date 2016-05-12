@@ -69,8 +69,8 @@ class SongsController < ApplicationController
         flash[:error] = 'No file selected'
       else
         #import
-        message = Song.import(params[:import][:file])
-        flash[:notice] = message
+        SongImportWorker.perform_async(params[:import][:file])
+        flash[:notice] = 'Queued for processing'
       end
       redirect_to upload_songs_path
     end
