@@ -72,7 +72,7 @@ class SongsController < ApplicationController
         name = params[:import][:file].original_filename
 
         temp_filename =  "SONG" + SecureRandom.hex + '.csv'
-        path = File.join('tmp', temp_filename)
+        path = Rails.root.join('tmp', temp_filename)
         File.open(path, "wb") { |f| f.write(params[:import][:file].read) }
 
         SongImportWorker.perform_async(path)
