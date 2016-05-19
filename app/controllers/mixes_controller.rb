@@ -97,14 +97,6 @@ class MixesController < ApplicationController
           # CsvImportJob.perform_later(self.name.underscore, s3_file.public_url.to_s, temp_file.original_filename, opts)
         end
       end
-    end
-  end
-
-  def self.get_s3_config
-    config_path = Rails.root.join('config/s3.yml')
-    return YAML.load(ERB.new(File.read(config_path)).result)[Rails.env].symbolize_keys
-  end
-      end
       redirect_to upload_mixes_path
     end
   end
