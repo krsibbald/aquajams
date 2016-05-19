@@ -89,14 +89,18 @@ class MixesController < ApplicationController
             region: 'us-east-1',
             credentials: Aws::Credentials.new( ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'])
           })
-         s3 =Aws::S3::Client.new
+         # s3 =Aws::S3::Client.new
           # s3 = Aws::S3.new(
           #   access_key_id: ENV['AWS_ACCESS_KEY_ID'],
           #   secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
           # )
+          s3 = Aws::S3::Resource.new(region:'us-east-1')
+          s3_file = s3.bucket(ENV['S3_BUCKET']).object(remote_filename)
 
-          s3_file = s3.buckets(ENV['S3_BUCKET']).object(remote_filename)
-          s3_file.write(file: temp_file.path, acl: :public_read)
+          s3_file.upload_file(params[:import][:file])
+
+          # s3_file = s3.buckets(ENV['S3_BUCKET']).object(remote_filename)
+          # s3_file.write(file: temp_file.path, acl: :public_read)
           Rails.logger.debug("uploaded csv to #{s3_file.public_url.to_s}")
           flash[:notice]= "Uploaded to #{s3_file.public_url.to_s}"
           # CsvImportJob.perform_later(self.name.underscore, s3_file.public_url.to_s, temp_file.original_filename, opts)
