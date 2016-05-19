@@ -67,7 +67,7 @@ class MixesController < ApplicationController
     if request.post?
       if !(params && params[:import] && params[:import][:file])
         flash[:error] = 'No file selected'
-      else
+      elsif false
         #import
         name = params[:import][:file].original_filename
 
@@ -77,6 +77,33 @@ class MixesController < ApplicationController
 
         MixImportWorker.perform_async(path)
         flash[:notice] = 'Queued for processing'
+      else
+        temp_file = params[:import][:file]
+
+        if  ! File.extname(temp_file.original_filename).match(/\A\.csv\z/i)
+          ImporterLog.create(importer: self.name.underscore, status: "File does not appear to be a CSV file")
+        else
+          remote_filename =  SecureRandom.hex + '.csv'
+
+          s3 = AWS::S3.new(
+            access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+            secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+          )
+
+          s3_file = s3.buckets[ENV['S3_BUCKET']].objects[remote_filename]
+          s3_file.write(file: temp_file.path, acl: :public_read)
+          Rails.logger.debug("uploaded csv to #{s3_file.public_url.to_s}")
+          flash[:notice]= "Uploaded to #{s3_file.public_url.to_s}"
+          # CsvImportJob.perform_later(self.name.underscore, s3_file.public_url.to_s, temp_file.original_filename, opts)
+        end
+      end
+    end
+  end
+
+  def self.get_s3_config
+    config_path = Rails.root.join('config/s3.yml')
+    return YAML.load(ERB.new(File.read(config_path)).result)[Rails.env].symbolize_keys
+  end
       end
       redirect_to upload_mixes_path
     end
