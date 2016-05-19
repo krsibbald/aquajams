@@ -95,9 +95,10 @@ class MixesController < ApplicationController
           #   secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
           # )
           s3 = Aws::S3::Resource.new(region:'us-east-1')
-          s3_file = s3.bucket(ENV['S3_BUCKET']).object(remote_filename)
+          S3Object.store(remote_filename, params[:import][:file].path, ENV['S3_BUCKET'])
+          #s3_file = s3.bucket(ENV['S3_BUCKET']).object(remote_filename)
 
-          s3_file.upload_file(params[:import][:file])
+            #s3_file.upload_file(params[:import][:file])
 
           # s3_file = s3.buckets(ENV['S3_BUCKET']).object(remote_filename)
           # s3_file.write(file: temp_file.path, acl: :public_read)
