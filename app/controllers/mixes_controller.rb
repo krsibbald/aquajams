@@ -95,7 +95,7 @@ class MixesController < ApplicationController
           #   secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
           # )
 
-          s3_file = s3.buckets[ENV['S3_BUCKET']].objects[remote_filename]
+          s3_file = s3.buckets(ENV['S3_BUCKET']).object(remote_filename)
           s3_file.write(file: temp_file.path, acl: :public_read)
           Rails.logger.debug("uploaded csv to #{s3_file.public_url.to_s}")
           flash[:notice]= "Uploaded to #{s3_file.public_url.to_s}"
