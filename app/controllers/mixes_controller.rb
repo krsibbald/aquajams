@@ -85,10 +85,14 @@ class MixesController < ApplicationController
         else
           remote_filename =  SecureRandom.hex + '.csv'
 
-          s3 = Aws::S3.new(
-            access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-            secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
-          )
+         s3 = Aws::config.update({
+            region: 'us-east-1',
+            credentials: Aws::Credentials.new( ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'])
+          })
+          # s3 = Aws::S3.new(
+          #   access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+          #   secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+          # )
 
           s3_file = s3.buckets[ENV['S3_BUCKET']].objects[remote_filename]
           s3_file.write(file: temp_file.path, acl: :public_read)
