@@ -72,10 +72,12 @@ class SongsController < ApplicationController
         name = params[:import][:file].original_filename
 
         temp_filename =  "SONG" + SecureRandom.hex + '.csv'
-        path = File.join('tmp', temp_filename)
-        File.open(path, "wb") { |f| f.write(params[:import][:file].read) }
+        # path = File.join('tmp', temp_filename)
+        # File.open(path, "wb") { |f| f.write(params[:import][:file].read) }
 
-        SongImportWorker.perform_async(path)
+        temp_file_path = params[:import][:file].path
+        s3_path = upload_to_s3(temp_file_path, temp_filename)
+        SongImportWorker.perform_async(s3_path)
         flash[:notice] = 'Queued for processing'
       end
       redirect_to upload_songs_path
@@ -95,5 +97,16 @@ class SongsController < ApplicationController
 
     def set_tab
       @tab = 'song'
+    end
+
+    def upload_to_s3(file, file_key)
+      s3 = Aws::S3::Resource.new(
+        credentials: Aws::Credentials.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']),
+        region: 'us-east-1'
+      )
+ 
+      obj = s3.bucket(ENV['S3_BUCKET']).object(file_key)
+      obj.upload_file(file, acl:'public-read')
+      obj.public_url
     end
 end
