@@ -53,6 +53,7 @@ group :development, :test do
   gem "rspec-rails", "~> 3.0"
   gem 'rspec-its'
   gem 'factory_girl_rails'
+  gem 'dotenv-rails'
 end
 
 group :development do
