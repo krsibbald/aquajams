@@ -1,4 +1,5 @@
 require 'csv'
+require 'open-uri'
 
 class SongImportWorker
   include Sidekiq::Worker
@@ -8,7 +9,13 @@ class SongImportWorker
     row_num = 0
     cd = nil
     headers = []
+
+    if file.respond_to?(:match) && file.match(/\Ahttp/)
+      file = open(file)
+    end
+
     file_name = file.respond_to?(:path) ? file.path : file
+
     song_count = 0
     cd_count = 0
     artist_count = 0
