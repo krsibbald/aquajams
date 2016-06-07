@@ -1,6 +1,6 @@
 require 'csv'
 
-class MixImportWorker
+class MixImportWorker < ImportWorker
   include Sidekiq::Worker
 
   HEADERS = ["___Prime, RoundDown (2)", 'One or Multiple?', '__Total Time', '___"Mix List" ID:  CD_mm-dd-yy.xls.', 'Date Recorded', '___Songs', 'Source', '___Music Type', '___Remarks']
@@ -9,7 +9,7 @@ class MixImportWorker
   def perform(file)
     row_num = 0
     headers = []
-    file_name = file.respond_to?(:path) ? file.path : file
+    file_name = file_name_from_file(file)
     mix_count = 0
     CSV.foreach(file_name, 'r:ISO-8859-15:UTF-8') do |row|
       row_num += 1

@@ -1,7 +1,4 @@
-require 'csv'
-require 'open-uri'
-
-class SongImportWorker
+class SongImportWorker < ImportWorker
   include Sidekiq::Worker
   HEADERS = ["CD's ID", "___Song's Name", "Time, as hh:mm:ss", '___Year', '___Artist', '___Billboard Position', '__+ Weeks at', 'BPM 1']
 
@@ -10,11 +7,7 @@ class SongImportWorker
     cd = nil
     headers = []
 
-    if file.respond_to?(:match) && file.match(/\Ahttp/)
-      file = open(file)
-    end
-
-    file_name = file.respond_to?(:path) ? file.path : file
+    file_name = file_name_from_file(file)
 
     song_count = 0
     cd_count = 0
