@@ -33,7 +33,7 @@ class SongImportWorker < ImportWorker
           end
         else #this row has song information
           song_name = info["___Song's Name"]
-          if cd #&& cd.songs.where(name: song_name).none?
+          if cd && cd.songs.where(name: song_name).none?
             s = Song.new
             s.name = song_name
             t = info["Time, as hh:mm:ss"]
