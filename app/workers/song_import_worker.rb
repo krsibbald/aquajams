@@ -1,6 +1,6 @@
 class SongImportWorker < ImportWorker
   include Sidekiq::Worker
-  HEADERS = ["CD's ID", "___Song's Name", "Time, as hh:mm:ss", '___Year', '___Artist', '___Billboard Position', '__+ Weeks at', 'BPM 1']
+  HEADERS = ["CD's ID", "___Song", "Time, as hh:mm:ss", '___Year', '___Artist', '___Billboard Position', '__+ Weeks at', 'BPM 1']
 
   def perform(file)
     row_num = 0
@@ -22,7 +22,7 @@ class SongImportWorker < ImportWorker
           cd_code = info["CD's ID"]
           cd = Cd.where(code: cd_code).first
           unless cd
-            cd_name = info["___Song's Name"]
+            cd_name = info["___Song"]
             cd = Cd.where(name: cd_name).first
             unless cd
               cd = Cd.new(name: cd_name, code: cd_code)
@@ -32,7 +32,7 @@ class SongImportWorker < ImportWorker
             end
           end
         else #this row has song information
-          song_name = info["___Song's Name"]
+          song_name = info["___Song"]
           if cd && cd.songs.where(name: song_name).none?
             s = Song.new
             s.name = song_name
