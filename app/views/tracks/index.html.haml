@@ -1,20 +1,31 @@
 %p#notice= notice
 %h1 Listing Tracks
+
+
+= will_paginate @tracks
 %table.table.table-bordered
   %thead
     %tr
-      %th Mix
-      %th Song
-      %th Ord
+      %th=sort_link @search, :mix_code
+      %th=sort_link @search, :mix_name
+      %th=sort_link @search, :song_name
+      %th=sort_link @search, :ord
       %th{:colspan => "3"}
   %tbody
     - @tracks.each do |track|
       %tr
-        %td= track.mix
-        %td= track.song
+        %td
+          -if track.mix.try(:code)
+            =link_to track.mix.code, mix_path(track.mix)
+        %td
+          -if track.mix.try(:name)
+            =link_to track.mix.name, mix_path(track.mix)
+
+        %td= track.song.name
         %td= track.ord
         %td= link_to 'Show', track
         %td= link_to 'Edit', edit_track_path(track)
         %td= link_to 'Destroy', track, method: :delete, data: { confirm: 'Are you sure?' }
+= will_paginate @tracks
 %br/
 = link_to 'New Track', new_track_path

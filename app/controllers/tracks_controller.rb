@@ -4,7 +4,9 @@ class TracksController < ApplicationController
   # GET /tracks
   # GET /tracks.json
   def index
-    @tracks = Track.all
+    @search = Track.search(params[:q]) #Using the Ransack Gem
+    @page = params[:page] || 1
+    @tracks = @search.result.includes(:mix, :song).paginate(:page => @page, :per_page => 50)
   end
 
   # GET /tracks/1

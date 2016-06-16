@@ -20,6 +20,27 @@
 %p
   %strong Notes:
   = @mix.notes
+%p
+  %strong Songs
+  %ul
+    -last_song_name = nil
+    -last_artist_id = nil
+    -@mix.songs.order(:name).each do |song|
+      -#duplicate?
+      -if last_song_name && last_artist_id && (last_song_name == song.name) && (last_artist_id == song.artist.try(:id))
+      -else
+        -last_song_name = song.name
+        -last_artist_id = song.artist.try(:id)
+        %li
+
+          =song.name
+          -if song.artist.try(:name)
+            by
+            =link_to song.artist.name, artist_path(song.artist)
+          -if song.cd
+            cd code: 
+            -@mix.songs.where(name: song.name, artist: song.artist).each do |same_song|
+              =link_to same_song.cd.try(:code), cd_path(same_song.cd)
 = link_to 'Edit', edit_mix_path(@mix)
 |
 = link_to 'Back', mixes_path
