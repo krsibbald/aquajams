@@ -61,6 +61,24 @@ class SongImportWorker < ImportWorker
             s.bpm = info['BPM 1']
             if s.save!
               song_count += 1
+              #Is it listed on any mix tracks? 
+              mix_keys = []
+              info.keys.each do |k|
+                if k.match(/\A_+\d+\z/)
+                  mix_keys << k
+                end
+              end
+              mix_list = {}
+              mix_keys.each do |k|
+                if info[k] && (info[k] != 0) && (info[k] != '0')#not nil
+                  mix_list[k] = info[k]
+                end
+              end
+              mix_list.keys.each do |mix_name|
+                mix_code = mix_name.match(/\A_+(\d+)\z/)[1].to_i
+                mix = Mix.where(code: mix_code).first || Mix.create(code: mix_code)
+                Track.create(mix: mix, song: s)
+              end
             end
           end
         end
