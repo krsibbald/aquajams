@@ -56,6 +56,11 @@ describe SongImportWorker do
       expect(job_song).to_not be_nil
       expect(job_song.artist.try(:name)).to eq "Silhouettes"
       expect(job_song.cd.try(:name)).to eq "1958, The Rock 'n' Roll Era"
+
+      #mix
+      mix219 = Mix.where(code: 219).first
+      expect(mix219).to_not be_nil
+      expect(Track.where(mix: mix219, song: job_song)).to_not be_nil
     end
     it "creates cds" do
       siw = SongImportWorker.new
