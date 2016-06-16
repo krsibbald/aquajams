@@ -66,5 +66,16 @@ describe SongImportWorker do
       good_cd = Cd.where(name: '1986, Billboard Top Hits').first
       expect(good_cd).to_not be_nil
     end
+    it "creates mixes and tracks" do
+      siw = SongImportWorker.new
+      siw.perform(csv)
+      b_good = Song.where(name: 'Johnny B. Goode').first
+      expect(b_good).to_not be_nil
+      mix219 = Mix.where(code: 219).first
+      expect(mix219).to_not be_nil
+
+      track = Track.where(mix: mix219, song: b_good).first
+      expect(track).to_not be_nil
+    end
   end
 end
