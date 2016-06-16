@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160509011449) do
+ActiveRecord::Schema.define(version: 20160616151624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 20160509011449) do
     t.boolean  "multiple",          default: false, null: false
     t.date     "date_for_mix_list"
   end
+
+  add_index "mixes", ["code"], name: "index_mixes_on_code", unique: true, using: :btree
 
   create_table "songs", force: :cascade do |t|
     t.string   "name"
