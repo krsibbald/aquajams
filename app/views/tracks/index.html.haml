@@ -6,9 +6,9 @@
 %table.table.table-bordered
   %thead
     %tr
-      %th=sort_link @search, :mix_code
-      %th=sort_link @search, :mix_name
-      %th=sort_link @search, :song_name
+      %th=sort_link @search, :mix_code, "Mix Code"
+      %th=sort_link @search, :mix_name, "Mix Name"
+      %th=sort_link @search, :song_name, "Song Name"
       %th=sort_link @search, :ord
       %th{:colspan => "3"}
   %tbody
