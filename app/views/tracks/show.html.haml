@@ -1,10 +1,12 @@
 %p#notice= notice
 %p
   %strong Mix:
-  = @track.mix
+  -if @track.mix
+    = link_to @track.mix.name, @track.mix
 %p
   %strong Song:
-  = @track.song
+  -if @track.song
+    = link_to @track.song.name, @track.song
 %p
   %strong Ord:
   = @track.ord
