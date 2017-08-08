@@ -1,6 +1,6 @@
 %p#notice= notice
-%h1 Listing Songs
-
+%h1 Songs
+=render 'search_form'
 = will_paginate @songs
 %table.table.table-bordered
   %thead

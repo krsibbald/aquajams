@@ -1,0 +1,11 @@
+$search-bg-color: #DDDDDD;
+$search-outline-color: #AAAAAA;
+
+.search-form{
+  padding: 5px;
+  background-color: $search-bg-color;
+  border-width: 1px;
+  border-style: solid;
+  border-color: $search-outline-color;
+  border-radius: 3px;
+}
